@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIP Official Bio Data Maker</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eef3f8;
+  color:#172033;
+}
+
+/* HEADER */
+.topbar{
+  background:linear-gradient(135deg,#062b3c,#007c83,#00a7a7);
+  color:white;
+  padding:18px 20px;
+  text-align:center;
+  box-shadow:0 4px 15px #0002;
+}
+
+.topbar h1{
+  font-size:25px;
+  letter-spacing:.5px;
+}
+
+.topbar p{
+  margin-top:5px;
+  font-size:13px;
+  opacity:.9;
+}
+
+/* MAIN */
+.container{
+  width:95%;
+  max-width:1450px;
+  margin:25px auto;
+  display:grid;
+  grid-template-columns:450px 1fr;
+  gap:25px;
+}
+
+/* FORM PANEL */
+.form-panel{
+  background:white;
+  border-radius:18px;
+  padding:22px;
+  box-shadow:0 8px 30px #002b3c18;
+  height:max-content;
+}
+
+.form-title{
+  color:#006d73;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:20px;
+  border-bottom:2px solid #00a7a7;
+  padding-bottom:10px;
+}
+
+.section-title{
+  margin:20px 0 12px;
+  padding:9px 12px;
+  border-left:5px solid #00a7a7;
+  background:#edfafa;
+  color:#00676d;
+  font-weight:bold;
+  border-radius:5px;
+}
+
+label{
+  display:block;
+  font-size:13px;
+  font-weight:bold;
+  margin:11px 0 5px;
+  color:#384454;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:11px 12px;
+  border:1px solid #ccd7df;
+  border-radius:8px;
+  outline:none;
+  font-size:14px;
+  background:#fbfdff;
+}
+
+input:focus,textarea:focus,select:focus{
+  border-color:#00a7a7;
+  box-shadow:0 0 0 3px #00a7a718;
+}
+
+textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.photo-upload{
+  border:2px dashed #00a7a7;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
+  background:#f5ffff;
+}
+
+.photo-upload input{
+  border:none;
+  background:none;
+}
+
+/* BUTTONS */
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+
+button{
+  border:none;
+  padding:13px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#007d83,#00a7a7);
+  color:white;
+}
+
+.btn-print{
+  background:#172033;
+  color:white;
+}
+
+.btn-reset{
+  background:#e8edf2;
+  color:#263342;
+}
+
+button:hover{
+  transform:translateY(-1px);
+  opacity:.92;
+}
+
+/* PREVIEW AREA */
+.preview-area{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.paper{
+  width:210mm;
+  min-height:297mm;
+  background:white;
+  box-shadow:0 10px 40px #0002;
+  padding:14mm;
+  position:relative;
+  overflow:hidden;
+}
+
+/* CV HEADER */
+.cv-header{
+  border-bottom:4px solid #008b91;
+  padding-bottom:13px;
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
+
+.cv-photo{
+  width:115px;
+  height:135px;
+  object-fit:cover;
+  border:4px solid #008b91;
+  padding:3px;
+  background:white;
+}
+
+.photo-placeholder{
+  width:115px;
+  height:135px;
+  border:3px solid #008b91;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#777;
+  font-size:12px;
+  background:#f5f7f8;
+}
+
+.cv-name{
+  font-size:30px;
+  font-weight:bold;
+  color:#07394a;
+  text-transform:uppercase;
+}
+
+.cv-job{
+  color:#00858b;
+  margin-top:6px;
+  font-size:15px;
+  font-weight:bold;
+}
+
+.contact-line{
+  margin-top:10px;
+  font-size:11px;
+  line-height:1.7;
+  color:#4a5663;
+}
+
+/* CONTENT */
+.cv-section{
+  margin-top:18px;
+}
+
+.cv-section h2{
+  font-size:15px;
+  color:#006d73;
+  border-bottom:2px solid #dceff0;
+  padding-bottom:5px;
+  margin-bottom:8px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px 18px;
+  font-size:11.5px;
+  line-height:1.65;
+}
+
+.info-item b{
+  color:#374555;
+}
+
+.cv-text{
+  font-size:11.5px;
+  line-height:1.7;
+  color:#333;
+}
+
+.education-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:10.5px;
+}
+
+.education-table th{
+  background:#087c82;
+  color:white;
+  padding:6px;
+}
+
+.education-table td{
+  border:1px solid #d5e0e4;
+  padding:6px;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.skill{
+  background:#e7f7f7;
+  color:#00666c;
+  border:1px solid #b8e1e1;
+  padding:5px 9px;
+  border-radius:15px;
+  font-size:10.5px;
+}
+
+.declaration{
+  font-size:10.5px;
+  line-height:1.6;
+}
+
+.signature-area{
+  margin-top:28px;
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+}
+
+.signature{
+  text-align:center;
+  min-width:120px;
+}
+
+.signature-line{
+  border-top:1px solid #444;
+  padding-top:5px;
+  margin-top:25px;
+}
+
+/* EMPTY */
+.empty{
+  color:#999;
+}
+
+/* MOBILE */
+@media(max-width:1000px){
+  .container{
+    grid-template-columns:1fr;
+  }
+
+  .preview-area{
+    overflow:auto;
+    justify-content:flex-start;
+    padding:10px;
+  }
+
+  .paper{
+    transform-origin:top left;
+  }
+}
+
+@media(max-width:600px){
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+  .paper{
+    width:210mm;
+  }
+
+  .cv-name{
+    font-size:24px;
+  }
+}
+
+/* PRINT */
+@media print{
+
+  body{
+    background:white;
+  }
+
+  .topbar,
+  .form-panel{
+    display:none !important;
+  }
+
+  .container{
+    display:block;
+    width:auto;
+    margin:0;
+  }
+
+  .preview-area{
+    display:block;
+    padding:0;
+  }
+
+  .paper{
+    width:210mm;
+    min-height:297mm;
+    box-shadow:none;
+    margin:0;
+    padding:14mm;
+  }
+
+  @page{
+    size:A4;
+    margin:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <h1>VIP Official Bio Data Maker</h1>
+  <p>Create • Preview • Print • Save as PDF</p>
+</header>
+
+<div class="container">
+
+<!-- ================= FORM ================= -->
+
+<div class="form-panel">
+
+<div class="form-title">
+  Bio Data Information
+</div>
+
+<div class="section-title">Personal Information</div>
+
+<label>Full Name</label>
+<input id="name" placeholder="Enter full name">
+
+<label>Professional Title</label>
+<input id="job" placeholder="e.g. Computer Operator / Accountant">
+
+<div class="row">
+
+<div>
+<label>Date of Birth</label>
+<input type="date" id="dob">
+</div>
+
+<div>
+<label>Gender</label>
+<select id="gender">
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+</div>
+
+</div>
+
+<div class="row">
+
+<div>
+<label>Marital Status</label>
+<select id="marital">
+<option value="">Select</option>
+<option>Single</option>
+<option>Married</option>
+<option>Unmarried</option>
+</select>
+</div>
+
+<div>
+<label>Nationality</label>
+<input id="nationality" placeholder="Indian">
+</div>
+
+</div>
+
+<label>Religion</label>
+<input id="religion" placeholder="Religion">
+
+<label>Blood Group</label>
+<input id="blood" placeholder="e.g. B+">
+
+<div class="section-title">Photo</div>
+
+<div class="photo-upload">
+<input type="file" id="photo" accept="image/*">
+</div>
+
+<div class="section-title">Contact Details</div>
+
+<label>Mobile Number</label>
+<input id="mobile" placeholder="+91 XXXXX XXXXX">
+
+<label>Email</label>
+<input id="email" type="email" placeholder="example@email.com">
+
+<label>Address</label>
+<textarea id="address" placeholder="Full address"></textarea>
+
+<div class="section-title">Family Details</div>
+
+<div class="row">
+
+<div>
+<label>Father's Name</label>
+<input id="father">
+</div>
+
+<div>
+<label>Mother's Name</label>
+<input id="mother">
+</div>
+
+</div>
+
+<label>Spouse Name</label>
+<input id="spouse">
+
+<div class="section-title">Education</div>
+
+<label>Qualification 1</label>
+<input id="edu1" placeholder="e.g. Higher Secondary - WBCHSE">
+
+<label>Qualification 2</label>
+<input id="edu2" placeholder="e.g. B.A. - University Name">
+
+<label>Qualification 3</label>
+<input id="edu3" placeholder="e.g. Computer Course">
+
+<div class="section-title">Professional Details</div>
+
+<label>Work Experience</label>
+<textarea id="experience" placeholder="Describe your work experience"></textarea>
+
+<label>Skills</label>
+<input id="skills" placeholder="Computer, MS Office, Photoshop, Communication">
+
+<label>Languages</label>
+<input id="languages" placeholder="Bengali, Hindi, English">
+
+<label>Hobbies</label>
+<input id="hobbies" placeholder="Reading, Music, Travelling">
+
+<div class="section-title">Declaration</div>
+
+<textarea id="declaration">I hereby declare that the information provided above is true and correct to the best of my knowledge and belief.</textarea>
+
+<div class="row">
+
+<div>
+<label>Place</label>
+<input id="place">
+</div>
+
+<div>
+<label>Date</label>
+<input type="date" id="date">
+</div>
+
+</div>
+
+<div class="buttons">
+
+<button class="btn-primary" onclick="saveData()">
+💾 Save Data
+</button>
+
+<button class="btn-print" onclick="window.print()">
+🖨️ Print / PDF
+</button>
+
+<button class="btn-reset" onclick="resetForm()">
+♻️ Reset
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ================= PREVIEW ================= -->
+
+<div class="preview-area">
+
+<div class="paper" id="paper">
+
+<div class="cv-header">
+
+<div id="photoBox">
+<div class="photo-placeholder">
+PHOTO
+</div>
+</div>
+
+<div>
+
+<div class="cv-name" id="pName">
+YOUR NAME
+</div>
+
+<div class="cv-job" id="pJob">
+PROFESSIONAL TITLE
+</div>
+
+<div class="contact-line">
+<span id="pMobile">Mobile Number</span>
+<br>
+<span id="pEmail">Email Address</span>
+<br>
+<span id="pAddress">Address</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Personal Information</h2>
+
+<div class="info-grid">
+
+<div class="info-item">
+<b>Date of Birth:</b>
+<span id="pDob">—</span>
+</div>
+
+<div class="info-item">
+<b>Gender:</b>
+<span id="pGender">—</span>
+</div>
+
+<div class="info-item">
+<b>Marital Status:</b>
+<span id="pMarital">—</span>
+</div>
+
+<div class="info-item">
+<b>Nationality:</b>
+<span id="pNationality">—</span>
+</div>
+
+<div class="info-item">
+<b>Religion:</b>
+<span id="pReligion">—</span>
+</div>
+
+<div class="info-item">
+<b>Blood Group:</b>
+<span id="pBlood">—</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="cv-section">
+
+<h2>Family Details</h2>
+
+<div class="info-grid">
+
+<div class="info-item">
+<b>Father's Name:</b>
+<span id="pFather">—</span>
+</div>
+
+<div class="info-item">
+<b>Mother's Name:</b>
+<span id="pMother">—</span>
+</div>
+
+<div class="info-item">
+<b>Spouse Name:</b>
+<span id="pSpouse">—</span>
+</div>
+
+</div>
+</div>
+
+
+<div class="cv-section">
+
+<h2>Educational Qualification</h2>
+
+<table class="education-table">
+
+<thead>
+<tr>
+<th>Sl.</th>
+<th>Qualification</th>
+</tr>
+</thead>
+
+<tbody id="educationBody">
+
+<tr>
+<td>1</td>
+<td class="empty">Not Provided</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Professional Experience</h2>
+
+<div class="cv-text" id="pExperience">
+No professional experience provided.
+</div>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Skills</h2>
+
+<div class="skills" id="pSkills">
+<span class="skill">Not Provided</span>
+</div>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Languages</h2>
+
+<div class="cv-text" id="pLanguages">
+—
+</div>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Hobbies & Interests</h2>
+
+<div class="cv-text" id="pHobbies">
+—
+</div>
+
+</div>
+
+
+<div class="cv-section">
+
+<h2>Declaration</h2>
+
+<div class="declaration" id="pDeclaration">
+I hereby declare that the information provided above is true and correct to the best of my knowledge and belief.
+</div>
+
+</div>
+
+
+<div class="signature-area">
+
+<div>
+Place: <span id="pPlace">________</span>
+<br>
+Date: <span id="pDate">________</span>
+</div>
+
+<div class="signature">
+<div class="signature-line">
+Applicant's Signature
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+<script>
+
+/* ==========================================
+   LIVE DATA SYSTEM
+========================================== */
+
+const fields = [
+
+"name","job","dob","gender","marital","nationality",
+"religion","blood","mobile","email","address",
+"father","mother","spouse","edu1","edu2","edu3",
+"experience","skills","languages","hobbies",
+"declaration","place","date"
+
+];
+
+function value(id){
+
+  const el=document.getElementById(id);
+
+  return el && el.value.trim()
+    ? el.value.trim()
+    : "—";
+
+}
+
+
+function formatDate(value){
+
+  if(!value) return "—";
+
+  const d=new Date(value);
+
+  if(isNaN(d)) return value;
+
+  return String(d.getDate()).padStart(2,"0")
+    +"/"+
+    String(d.getMonth()+1).padStart(2,"0")
+    +"/"+
+    d.getFullYear();
+
+}
+
+
+function updatePreview(){
+
+  document.getElementById("pName").textContent =
+    value("name") === "—" ? "YOUR NAME" : value("name");
+
+  document.getElementById("pJob").textContent =
+    value("job") === "—" ? "PROFESSIONAL TITLE" : value("job");
+
+  document.getElementById("pMobile").textContent =
+    value("mobile");
+
+  document.getElementById("pEmail").textContent =
+    value("email");
+
+  document.getElementById("pAddress").textContent =
+    value("address");
+
+  document.getElementById("pDob").textContent =
+    formatDate(document.getElementById("dob").value);
+
+  document.getElementById("pGender").textContent =
+    value("gender");
+
+  document.getElementById("pMarital").textContent =
+    value("marital");
+
+  document.getElementById("pNationality").textContent =
+    value("nationality");
+
+  document.getElementById("pReligion").textContent =
+    value("religion");
+
+  document.getElementById("pBlood").textContent =
+    value("blood");
+
+  document.getElementById("pFather").textContent =
+    value("father");
+
+  document.getElementById("pMother").textContent =
+    value("mother");
+
+  document.getElementById("pSpouse").textContent =
+    value("spouse");
+
+  document.getElementById("pExperience").textContent =
+    value("experience") === "—"
+      ? "No professional experience provided."
+      : value("experience");
+
+  document.getElementById("pLanguages").textContent =
+    value("languages");
+
+  document.getElementById("pHobbies").textContent =
+    value("hobbies");
+
+  document.getElementById("pDeclaration").textContent =
+    value("declaration");
+
+  document.getElementById("pPlace").textContent =
+    value("place");
+
+  document.getElementById("pDate").textContent =
+    formatDate(document.getElementById("date").value);
+
+
+  /* EDUCATION */
+
+  const educationBody =
+    document.getElementById("educationBody");
+
+  educationBody.innerHTML="";
+
+  const educationFields=[
+    "edu1",
+    "edu2",
+    "edu3"
+  ];
+
+  let count=0;
+
+  educationFields.forEach((id)=>{
+
+    const v=value(id);
+
+    if(v!=="—"){
+
+      count++;
+
+      const tr=document.createElement("tr");
+
+      tr.innerHTML=`
+        <td>${count}</td>
+        <td>${escapeHtml(v)}</td>
+      `;
+
+      educationBody.appendChild(tr);
+
+    }
+
+  });
+
+  if(count===0){
+
+    educationBody.innerHTML=`
+      <tr>
+        <td>1</td>
+        <td class="empty">Not Provided</td>
+      </tr>
+    `;
+
+  }
+
+
+  /* SKILLS */
+
+  const skillsBox=
+    document.getElementById("pSkills");
+
+  skillsBox.innerHTML="";
+
+  const skills=value("skills");
+
+  if(skills==="—"){
+
+    skillsBox.innerHTML=
+      `<span class="skill">Not Provided</span>`;
+
+  }else{
+
+    skills
+      .split(",")
+      .map(s=>s.trim())
+      .filter(Boolean)
+      .forEach(skill=>{
+
+        const span=
+          document.createElement("span");
+
+        span.className="skill";
+
+        span.textContent=skill;
+
+        skillsBox.appendChild(span);
+
+      });
+
+  }
+
+}
+
+
+/* SECURITY */
+
+function escapeHtml(text){
+
+  const div=document.createElement("div");
+
+  div.textContent=text;
+
+  return div.innerHTML;
+
+}
+
+
+/* LIVE UPDATE */
+
+fields.forEach(id=>{
+
+  const el=document.getElementById(id);
+
+  if(el){
+
+    el.addEventListener("input",updatePreview);
+
+    el.addEventListener("change",updatePreview);
+
+  }
+
+});
+
+
+/* ==========================================
+   PHOTO
+========================================== */
+
+document.getElementById("photo")
+.addEventListener("change",function(e){
+
+  const file=e.target.files[0];
+
+  if(!file) return;
+
+  const reader=new FileReader();
+
+  reader.onload=function(event){
+
+    document.getElementById("photoBox").innerHTML=`
+
+      <img
+        src="${event.target.result}"
+        class="cv-photo"
+        alt="Photo"
+      >
+
+    `;
+
+    localStorage.setItem(
+      "bioPhoto",
+      event.target.result
+    );
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+
+/* ==========================================
+   SAVE DATA
+========================================== */
+
+function saveData(){
+
+  const data={};
+
+  fields.forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+
+      data[id]=el.value;
+
+    }
+
+  });
+
+  localStorage.setItem(
+    "bioData",
+    JSON.stringify(data)
+  );
+
+  alert("✅ Bio Data saved successfully!");
+
+}
+
+
+/* ==========================================
+   LOAD DATA
+========================================== */
+
+function loadData(){
+
+  const saved=
+    localStorage.getItem("bioData");
+
+  if(saved){
+
+    try{
+
+      const data=JSON.parse(saved);
+
+      fields.forEach(id=>{
+
+        const el=document.getElementById(id);
+
+        if(el && data[id]!==undefined){
+
+          el.value=data[id];
+
+        }
+
+      });
+
+    }catch(e){}
+
+  }
+
+
+  const photo=
+    localStorage.getItem("bioPhoto");
+
+  if(photo){
+
+    document.getElementById("photoBox").innerHTML=`
+
+      <img
+        src="${photo}"
+        class="cv-photo"
+        alt="Photo"
+      >
+
+    `;
+
+  }
+
+  updatePreview();
+
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+function resetForm(){
+
+  if(!confirm(
+    "Are you sure you want to clear all data?"
+  )) return;
+
+  fields.forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+
+      el.value="";
+
+    }
+
+  });
+
+  localStorage.removeItem("bioData");
+  localStorage.removeItem("bioPhoto");
+
+  document.getElementById("photoBox").innerHTML=`
+    <div class="photo-placeholder">
+      PHOTO
+    </div>
+  `;
+
+  updatePreview();
+
+}
+
+
+/* START */
+
+loadData();
+
+</script>
+
+</body>
+</html>
